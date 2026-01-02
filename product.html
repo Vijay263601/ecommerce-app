@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html">⬅ Back to Shop</a>
+</header>
+
+<main class="product-detail">
+
+  <div class="product-images">
+    <img id="mainImage">
+    <div id="thumbs"></div>
+  </div>
+
+  <div class="product-info">
+    <h2 id="pName"></h2>
+
+    <p class="price">
+      <span class="mrp" id="pMrp"></span>
+      <span class="selling" id="pPrice"></span>
+    </p>
+
+    <p id="pDesc"></p>
+
+    <button id="addToCartBtn">Add to Cart</button>
+  </div>
+
+</main>
+
+<section class="reviews">
+  <h3>Reviews</h3>
+  <div id="reviewsList"></div>
+
+  <textarea id="reviewText" placeholder="Write a review"></textarea>
+  <button id="addReviewBtn">Add Review</button>
+</section>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/product.js"></script>
+
+</body>
+</html>

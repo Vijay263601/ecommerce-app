@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini E-Commerce</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <h2>Mini E-Commerce</h2>
+  <a href="cart.html" class="cart-link">
+    🛒 Cart <span id="cartCount">0</span>
+  </a>
+</header>
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  <div class="announcement-track" id="adsTrack"></div>
+</div>
+
+
+<section class="controls">
+  <!-- TOP TOOLBAR -->
+<section class="top-bar">
+
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="Search for products..."
+    >
+  </div>
+
+  <div class="filter-box">
+    <button data-price="all" class="active">All</button>
+    <button data-price="low">Under ₹1000</button>
+    <button data-price="mid">₹1000–₹2000</button>
+    <button data-price="high">Above ₹2000</button>
+  </div>
+
+</section>
+
+</section>
+
+<main id="productList"></main>
+<main class="product-grid" id="productList"></main>
+
+
+<div id="toast" class="toast"></div>
+
+<!-- Scripts -->
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/cartCount.js"></script>
+<script src="js/shop.js"></script>
+
+</body>
+</html>

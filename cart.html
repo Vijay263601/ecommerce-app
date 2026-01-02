@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h2>Your Cart</h2>
+  <a href="index.html">⬅ Back to Shop</a>
+</header>
+
+<main id="cartContainer">
+  <!-- Cart items render here -->
+</main>
+
+<!-- Coupon Section -->
+<div class="coupon-box">
+  <input type="text" id="couponInput" placeholder="Enter coupon code">
+  <button id="applyCoupon">Apply</button>
+  <p id="couponMsg"></p>
+</div>
+
+<!-- Total -->
+<div class="cart-summary">
+  <h3 id="totalPrice">Total: ₹0</h3>
+  <a href="checkout.html">
+    <button>Proceed to Checkout</button>
+  </a>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Scripts -->
+<script src="js/cart.js"></script>
+<script src="js/cartPage.js"></script>
+
+</body>
+</html>

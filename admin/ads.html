@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Ads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="admin.css">
+  <script src="protect.js"></script>
+</head>
+<body>
+
+<header>
+  <h2>Manage Ads</h2>
+  <a href="index.html">⬅ Admin Home</a>
+</header>
+
+<main>
+
+  <!-- ADD AD -->
+  <section>
+    <h3>Add New Advertisement</h3>
+
+    <div class="add-ad">
+      <input
+        type="text"
+        id="adText"
+        placeholder="Enter ad message (e.g. iPhone Sale – Flat 20% Off)"
+      >
+      <button id="addAdBtn">Add Ad</button>
+    </div>
+  </section>
+
+  <!-- ADS LIST -->
+  <section>
+    <h3>Active Advertisements</h3>
+    <ul id="adsList"></ul>
+  </section>
+
+</main>
+
+<script src="ads.js"></script>
+<script src="logout.js"></script>
+
+</body>
+</html>

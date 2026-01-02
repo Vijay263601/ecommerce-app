@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="admin.css">
+  <script src="protect.js"></script>
+
+</head>
+<body>
+
+<header>
+  <h2>Inventory Management</h2>
+  <a href="index.html">⬅ Admin Home</a>
+</header>
+
+<main>
+
+  <section>
+    <h3>Stock Levels</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Available Stock</th>
+          <th>Add Stock</th>
+        </tr>
+      </thead>
+
+      <tbody id="inventoryTable"></tbody>
+    </table>
+  </section>
+
+</main>
+
+<script src="../js/data.js"></script>
+<script src="inventory.js"></script>
+<script src="logout.js"></script>
+
+</body>
+</html>
