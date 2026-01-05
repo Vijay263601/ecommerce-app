@@ -30,6 +30,21 @@ function saveStock(stock) {
   localStorage.setItem("stock", JSON.stringify(stock));
 }
 
+/* ================= NORMALIZE IMAGE PATH ================= */
+
+function normalizeImagePath(path) {
+  path = path.trim();
+  if (!path) return null;
+
+  // If already absolute or starts with images/, keep it
+  if (path.startsWith("http") || path.startsWith("images/")) {
+    return path;
+  }
+
+  // Otherwise force images/ folder
+  return `images/${path}`;
+}
+
 /* ================= RENDER ================= */
 
 function renderProducts() {
@@ -64,13 +79,14 @@ saveBtn.onclick = () => {
   const mrp = Number(pMrp.value);
   const price = Number(pPrice.value);
   const stockQty = Number(pStock.value);
+
   const images = pImages.value
     .split(",")
-    .map(i => i.trim())
+    .map(i => normalizeImagePath(i))
     .filter(Boolean);
 
   if (!name || !price || !mrp || images.length === 0) {
-    alert("Please fill all required fields");
+    alert("Please fill all required fields and add at least one image");
     return;
   }
 
@@ -81,7 +97,14 @@ saveBtn.onclick = () => {
     // UPDATE
     products = products.map(p =>
       p.id === editId
-        ? { ...p, name, description: desc, mrp, price, images }
+        ? {
+            ...p,
+            name,
+            description: desc,
+            mrp,
+            price,
+            images
+          }
         : p
     );
     stock[editId] = stockQty;
@@ -105,6 +128,8 @@ saveBtn.onclick = () => {
   renderProducts();
 };
 
+/* ================= EDIT ================= */
+
 function editProduct(id) {
   const products = getProducts();
   const stock = getStock();
@@ -117,12 +142,14 @@ function editProduct(id) {
   pDesc.value = p.description || "";
   pMrp.value = p.mrp;
   pPrice.value = p.price;
-  pImages.value = p.images.join(", ");
+  pImages.value = (p.images || []).join(", ");
   pStock.value = stock[id] ?? 0;
 
   saveBtn.textContent = "Update Product";
   cancelBtn.style.display = "inline-block";
 }
+
+/* ================= DELETE ================= */
 
 function deleteProduct(id) {
   if (!confirm("Delete this product?")) return;
@@ -141,6 +168,8 @@ function deleteProduct(id) {
 
   renderProducts();
 }
+
+/* ================= RESET ================= */
 
 function resetForm() {
   editId = null;
