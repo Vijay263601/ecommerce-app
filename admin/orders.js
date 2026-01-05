@@ -42,6 +42,7 @@ function renderOrders(isAdmin = false) {
       <label>Status:</label>
       <select onchange="updateStatus(${order.id}, this.value)">
         <option value="processing" ${status==="processing"?"selected":""}>Processing</option>
+        <option value="placed" ${status==="placed"?"selected":""}>placed</option>
         <option value="out_for_delivery" ${status==="out_for_delivery"?"selected":""}>Out for Delivery</option>
         <option value="delivered" ${status==="delivered"?"selected":""}>Delivered</option>
         <option value="cancelled" ${status==="cancelled"?"selected":""}>Cancelled</option>
