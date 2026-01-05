@@ -449,3 +449,59 @@ button:disabled {
   background: #fecaca;
   color: #7f1d1d;
 }
+/* ===== ORDER STATUS BADGE ===== */
+.status-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.status-badge.processing {
+  background: #fde68a;
+  color: #92400e;
+}
+
+.status-badge.out_for_delivery {
+  background: #bfdbfe;
+  color: #1e40af;
+}
+
+.status-badge.delivered {
+  background: #bbf7d0;
+  color: #065f46;
+}
+
+.status-badge.cancelled {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+/* ===== ORDER TIMELINE ===== */
+.order-timeline {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 14px;
+  flex-wrap: wrap;
+}
+
+.order-timeline span {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #e5e7eb;
+  font-size: 12px;
+}
+
+.order-timeline span.done {
+  background: #22c55e;
+  color: white;
+}
+
+/* ===== DELIVERED MESSAGE ===== */
+.delivered-msg {
+  margin-top: 10px;
+  color: #16a34a;
+  font-weight: 600;
+}
