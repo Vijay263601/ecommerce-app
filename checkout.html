@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Orders</title>
+  <title>Checkout</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Font -->
@@ -15,16 +15,34 @@
 <body>
 
 <header>
-  <h2>My Orders</h2>
-  <a href="index.html">⬅ Back to Shop</a>
+  <h2>Checkout</h2>
+  <a href="cart.html">⬅ Back to Cart</a>
 </header>
 
-<main id="ordersContainer"></main>
+<main class="checkout-container">
 
-<script src="js/orders.js"></script>
-<script>
-  renderOrders();
-</script>
+  <!-- BILLING DETAILS -->
+  <form id="checkoutForm">
+    <h3>Billing Details</h3>
+
+    <input id="name" placeholder="Full Name" required>
+    <input id="email" type="email" placeholder="Email Address" required>
+    <textarea id="address" placeholder="Delivery Address" required></textarea>
+
+    <button type="submit">Place Order</button>
+  </form>
+
+  <!-- ORDER SUMMARY -->
+  <div class="order-summary">
+    <h3>Order Summary</h3>
+    <div id="orderItems"></div>
+    <h4 id="orderTotal">Total: ₹0</h4>
+  </div>
+
+</main>
+
+<script src="js/cart.js"></script>
+<script src="js/checkout.js"></script>
 
 </body>
 </html>
