@@ -420,3 +420,32 @@ button:disabled {
     padding: 16px 20px 40px;
   }
 }
+
+.status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.status.processing {
+  background: #fde68a;
+  color: #92400e;
+}
+
+.status.out {
+  background: #bfdbfe;
+  color: #1e40af;
+}
+
+.status.delivered {
+  background: #bbf7d0;
+  color: #065f46;
+}
+
+.status.cancelled {
+  background: #fecaca;
+  color: #7f1d1d;
+}

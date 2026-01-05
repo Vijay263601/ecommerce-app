@@ -1,5 +1,3 @@
-/* ================= RENDER ORDERS ================= */
-
 function renderOrders(isAdmin = false) {
   const container = document.getElementById("ordersContainer");
   if (!container) return;
@@ -13,18 +11,14 @@ function renderOrders(isAdmin = false) {
   }
 
   orders.slice().reverse().forEach(order => {
-
     const customer = order.customer || {};
     const items = order.items || [];
-    const status = order.status || "active";
-    const paid = order.paid === true;
-    const paymentMode = order.paymentMode || "N/A";
 
-    const itemsHTML = items.map(item => `
-      <li>
-        ${item.name} × ${item.qty}
-        — ₹${item.price * item.qty}
-      </li>
+    const status = order.status || "processing";
+    const deliveryDate = order.deliveryDate || "";
+
+    const itemsHTML = items.map(i => `
+      <li>${i.name} × ${i.qty} — ₹${i.price * i.qty}</li>
     `).join("");
 
     const div = document.createElement("div");
@@ -33,79 +27,47 @@ function renderOrders(isAdmin = false) {
     div.innerHTML = `
       <h3>Order #${order.id}</h3>
 
-      <p><strong>Date:</strong> ${order.date || "-"}</p>
+      <p><strong>Name:</strong> ${customer.name || "-"}</p>
+      <p><strong>Email:</strong> ${customer.email || "-"}</p>
+      <p><strong>Address:</strong> ${customer.address || "-"}</p>
 
-      ${
-        isAdmin ? `
-          <p><strong>Name:</strong> ${customer.name || "-"}</p>
-          <p><strong>Email:</strong> ${customer.email || "-"}</p>
-          <p><strong>Address:</strong> ${customer.address || "-"}</p>
-        ` : ""
-      }
+      <label><strong>Status:</strong></label>
+      <select onchange="updateStatus(${order.id}, this.value)">
+        <option value="processing" ${status==="processing"?"selected":""}>Processing</option>
+        <option value="out_for_delivery" ${status==="out_for_delivery"?"selected":""}>Out for Delivery</option>
+        <option value="delivered" ${status==="delivered"?"selected":""}>Delivered</option>
+        <option value="cancelled" ${status==="cancelled"?"selected":""}>Cancelled</option>
+      </select>
 
-      <p>
-        <strong>Order Status:</strong>
-        <span style="color:${status === "cancelled" ? "#ef4444" : "#16a34a"}">
-          ${status.toUpperCase()}
-        </span>
-      </p>
+      <br><br>
 
-      <p>
-        <strong>Payment Mode:</strong> ${paymentMode}
-      </p>
-
-      <p>
-        <strong>Payment Status:</strong>
-        <span style="color:${paid ? "#16a34a" : "#f59e0b"}">
-          ${paid ? "PAID" : "NOT PAID"}
-        </span>
-      </p>
+      <label><strong>Delivery Date:</strong></label>
+      <input type="date"
+        value="${deliveryDate}"
+        onchange="updateDeliveryDate(${order.id}, this.value)">
 
       <ul>${itemsHTML}</ul>
-
-      <p><strong>Total:</strong> ₹${order.total || 0}</p>
-
-      ${
-        isAdmin && status === "active" ? `
-          <button onclick="togglePaid(${order.id})">
-            ${paid ? "Mark Unpaid" : "Mark Paid"}
-          </button>
-
-          <button
-            style="background:#ef4444;margin-left:10px"
-            onclick="cancelOrder(${order.id})">
-            Cancel Order
-          </button>
-        ` : ""
-      }
+      <p><strong>Total:</strong> ₹${order.total}</p>
     `;
 
     container.appendChild(div);
   });
 }
 
-/* ================= ADMIN ACTIONS ================= */
+/* ===== ADMIN ACTIONS ===== */
 
-function togglePaid(id) {
+function updateStatus(id, newStatus) {
   let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
   orders = orders.map(o =>
-    o.id === id ? { ...o, paid: !o.paid } : o
+    o.id === id ? { ...o, status: newStatus } : o
   );
-
   localStorage.setItem("orders", JSON.stringify(orders));
-  renderOrders(true);
 }
 
-function cancelOrder(id) {
-  if (!confirm("Cancel this order?")) return;
-
+function updateDeliveryDate(id, date) {
   let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
   orders = orders.map(o =>
-    o.id === id ? { ...o, status: "cancelled" } : o
+    o.id === id ? { ...o, deliveryDate: date } : o
   );
-
   localStorage.setItem("orders", JSON.stringify(orders));
-  renderOrders(true);
 }
