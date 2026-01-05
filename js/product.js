@@ -1,191 +1,95 @@
-const table = document.getElementById("productTable");
+document.addEventListener("DOMContentLoaded", () => {
 
-const pName = document.getElementById("pName");
-const pDesc = document.getElementById("pDesc");
-const pMrp = document.getElementById("pMrp");
-const pPrice = document.getElementById("pPrice");
-const pImages = document.getElementById("pImages");
-const pStock = document.getElementById("pStock");
+  /* ================= ELEMENTS ================= */
+  const pName = document.getElementById("pName");
+  const pDesc = document.getElementById("pDesc");
+  const pMrp = document.getElementById("pMrp");
+  const pPrice = document.getElementById("pPrice");
 
-const saveBtn = document.getElementById("addProductBtn");
-const cancelBtn = document.getElementById("cancelEditBtn");
+  const mainImage = document.getElementById("mainImage");
+  const thumbs = document.getElementById("thumbs");
+  const addToCartBtn = document.getElementById("addToCartBtn");
 
-let editId = null;
-
-/* ================= HELPERS ================= */
-
-function getProducts() {
-  return JSON.parse(localStorage.getItem("products")) || [];
-}
-
-function saveProducts(list) {
-  localStorage.setItem("products", JSON.stringify(list));
-}
-
-function getStock() {
-  return JSON.parse(localStorage.getItem("stock")) || {};
-}
-
-function saveStock(stock) {
-  localStorage.setItem("stock", JSON.stringify(stock));
-}
-
-/* ================= NORMALIZE IMAGE PATH ================= */
-
-function normalizeImagePath(path) {
-  path = path.trim();
-  if (!path) return null;
-
-  // If already absolute or starts with images/, keep it
-  if (path.startsWith("http") || path.startsWith("images/")) {
-    return path;
-  }
-
-  // Otherwise force images/ folder
-  return `images/${path}`;
-}
-
-/* ================= RENDER ================= */
-
-function renderProducts() {
-  const products = getProducts();
-  const stock = getStock();
-  table.innerHTML = "";
-
-  products.forEach(p => {
-    const tr = document.createElement("tr");
-
-    tr.innerHTML = `
-      <td>${p.name}</td>
-      <td>₹${p.price}</td>
-      <td>${stock[p.id] ?? p.stock ?? 0}</td>
-      <td>
-        <button onclick="editProduct(${p.id})">✏ Edit</button>
-        <button style="background:#ef4444" onclick="deleteProduct(${p.id})">
-          ❌ Delete
-        </button>
-      </td>
-    `;
-
-    table.appendChild(tr);
-  });
-}
-
-/* ================= ADD / EDIT ================= */
-
-saveBtn.onclick = () => {
-  const name = pName.value.trim();
-  const desc = pDesc.value.trim();
-  const mrp = Number(pMrp.value);
-  const price = Number(pPrice.value);
-  const stockQty = Number(pStock.value);
-
-  const images = pImages.value
-    .split(",")
-    .map(i => normalizeImagePath(i))
-    .filter(Boolean);
-
-  if (!name || !price || !mrp || images.length === 0) {
-    alert("Please fill all required fields and add at least one image");
+  if (!mainImage || !addToCartBtn) {
+    console.error("Required elements missing in product.html");
     return;
   }
 
-  let products = getProducts();
-  let stock = getStock();
+  /* ================= GET PRODUCT ID ================= */
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("id");
 
-  if (editId) {
-    // UPDATE
-    products = products.map(p =>
-      p.id === editId
-        ? {
-            ...p,
-            name,
-            description: desc,
-            mrp,
-            price,
-            images
-          }
-        : p
-    );
-    stock[editId] = stockQty;
-  } else {
-    // ADD
-    const id = Date.now();
-    products.push({
-      id,
-      name,
-      description: desc,
-      mrp,
-      price,
-      images
-    });
-    stock[id] = stockQty;
+  if (!productId) {
+    alert("Invalid product");
+    return;
   }
 
-  saveProducts(products);
-  saveStock(stock);
-  resetForm();
-  renderProducts();
-};
+  /* ================= GET PRODUCTS ================= */
+  const products = JSON.parse(localStorage.getItem("products")) || [];
+  const product = products.find(p => String(p.id) === String(productId));
 
-/* ================= EDIT ================= */
+  if (!product) {
+    alert("Product not found");
+    return;
+  }
 
-function editProduct(id) {
-  const products = getProducts();
-  const stock = getStock();
-  const p = products.find(x => x.id === id);
-  if (!p) return;
+  /* ================= RENDER PRODUCT ================= */
+  pName.textContent = product.name;
+  pDesc.textContent = product.description || "";
+  pMrp.textContent = `₹${product.mrp}`;
+  pPrice.textContent = `₹${product.price}`;
 
-  editId = id;
+  /* ================= IMAGES ================= */
+  if (Array.isArray(product.images) && product.images.length > 0) {
+    mainImage.src = product.images[0];
+  } else {
+    mainImage.src = "images/no-image.png";
+  }
 
-  pName.value = p.name;
-  pDesc.value = p.description || "";
-  pMrp.value = p.mrp;
-  pPrice.value = p.price;
-  pImages.value = (p.images || []).join(", ");
-  pStock.value = stock[id] ?? 0;
+  mainImage.onerror = () => {
+    mainImage.src = "images/no-image.png";
+  };
 
-  saveBtn.textContent = "Update Product";
-  cancelBtn.style.display = "inline-block";
-}
+  thumbs.innerHTML = "";
 
-/* ================= DELETE ================= */
+  (product.images || []).forEach(img => {
+    const t = document.createElement("img");
+    t.src = img;
 
-function deleteProduct(id) {
-  if (!confirm("Delete this product?")) return;
+    t.onclick = () => {
+      mainImage.src = img;
+    };
 
-  const products = getProducts().filter(p => p.id !== id);
-  const stock = getStock();
-  delete stock[id];
+    thumbs.appendChild(t);
+  });
 
-  saveProducts(products);
-  saveStock(stock);
+  /* ================= ADD TO CART ================= */
+  addToCartBtn.onclick = () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  // remove from cart
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart = cart.filter(i => i.id !== id);
-  localStorage.setItem("cart", JSON.stringify(cart));
+    const exists = cart.find(i => i.id === product.id);
 
-  renderProducts();
-}
+    if (exists) {
+      exists.qty += 1;
+    } else {
+      cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.images?.[0] || "",
+        qty: 1
+      });
+    }
 
-/* ================= RESET ================= */
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-function resetForm() {
-  editId = null;
-  pName.value = "";
-  pDesc.value = "";
-  pMrp.value = "";
-  pPrice.value = "";
-  pImages.value = "";
-  pStock.value = "";
+    addToCartBtn.textContent = "Added ✓";
+    addToCartBtn.disabled = true;
 
-  saveBtn.textContent = "Save Product";
-  cancelBtn.style.display = "none";
-}
+    setTimeout(() => {
+      addToCartBtn.textContent = "Add to Cart";
+      addToCartBtn.disabled = false;
+    }, 1200);
+  };
 
-cancelBtn.onclick = resetForm;
-
-/* ================= INIT ================= */
-
-renderProducts();
+});
