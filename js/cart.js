@@ -8,6 +8,12 @@ function saveCart(cart) {
 
 function addToCart(product) {
   const cart = getCart();
+
+  const image =
+    product.images?.[0] ||
+    product.image ||
+    "assets/images/default.jpg";
+
   const found = cart.find(i => i.id === product.id);
 
   if (found) {
@@ -17,12 +23,13 @@ function addToCart(product) {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.images?.[0] || "",
+      image: image,
       qty: 1
     });
   }
 
   saveCart(cart);
+
   if (typeof updateCartCount === "function") {
     updateCartCount();
   }

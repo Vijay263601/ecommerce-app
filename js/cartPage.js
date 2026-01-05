@@ -19,14 +19,20 @@ function renderCart() {
     const div = document.createElement("div");
     div.className = "cart-item";
 
-    div.innerHTML = `
-      <img src="${item.image}">
-      <div class="cart-info">
-        <h4>${item.name}</h4>
-        <p>₹${item.price}</p>
-        <input type="number" min="1" value="${item.qty}">
-      </div>
-    `;
+    const imgSrc =
+  item.image ||
+  item.images?.[0] ||
+  "assets/images/default.jpg";
+
+div.innerHTML = `
+  <img src="${imgSrc}" onerror="this.src='assets/images/default.jpg'">
+  <div class="cart-info">
+    <h4>${item.name}</h4>
+    <p>₹${item.price}</p>
+    <input type="number" min="1" value="${item.qty}">
+  </div>
+`;
+
 
     div.querySelector("input").onchange = e => {
       item.qty = Number(e.target.value);
