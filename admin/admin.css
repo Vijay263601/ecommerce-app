@@ -1,20 +1,36 @@
+/* ================= ROOT ================= */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --danger: #ef4444;
+  --success: #16a34a;
+  --dark: #0f172a;
+  --muted: #64748b;
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --radius: 16px;
+}
+
 /* ================= RESET ================= */
 * {
   box-sizing: border-box;
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {
   margin: 0;
-  background: #f4f7fb;
-  color: #0f172a;
+  background: var(--bg);
+  color: var(--dark);
 }
 
 /* ================= HEADER ================= */
 header {
-  background: linear-gradient(90deg, #0f172a, #020617);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(90deg, #020617, #0f172a);
   color: white;
-  padding: 16px 30px;
+  padding: 18px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,12 +39,22 @@ header {
 header h2 {
   margin: 0;
   font-size: 22px;
+  font-weight: 600;
 }
 
 header a {
   color: white;
   text-decoration: none;
   font-weight: 500;
+}
+
+header button {
+  background: var(--danger);
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
 /* ================= MAIN ================= */
@@ -43,8 +69,71 @@ section {
 }
 
 h3 {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-size: 18px;
+  font-weight: 600;
+}
+
+/* ================= DASHBOARD ================= */
+.admin-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.admin-tile {
+  background: var(--card);
+  padding: 26px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--dark);
+  box-shadow: 0 12px 35px rgba(2,6,23,.08);
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.admin-tile h3 {
+  margin-top: 0;
+}
+
+.admin-tile p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.admin-tile:hover {
+  transform: translateY(-6px);
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 22px 50px rgba(2,6,23,.15);
+}
+
+.admin-tile:hover p {
+  color: #e5e7eb;
+}
+
+/* ================= ADMIN GRID (OLD DASHBOARD) ================= */
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.admin-card {
+  background: white;
+  padding: 30px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--dark);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  transition: transform .25s ease, background .25s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-6px);
+  background: var(--primary);
+  color: white;
 }
 
 /* ================= TABLE ================= */
@@ -52,20 +141,20 @@ table {
   width: 100%;
   background: white;
   border-collapse: collapse;
-  border-radius: 14px;
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(2,6,23,0.08);
+  box-shadow: 0 12px 30px rgba(2,6,23,0.08);
 }
 
 th {
   background: #f1f5f9;
-  padding: 12px;
+  padding: 14px;
   font-weight: 600;
   text-align: center;
 }
 
 td {
-  padding: 12px;
+  padding: 14px;
   border-bottom: 1px solid #e5e7eb;
   text-align: center;
 }
@@ -74,125 +163,85 @@ tr:last-child td {
   border-bottom: none;
 }
 
-/* ================= BUTTONS ================= */
-button {
-  padding: 8px 14px;
-  background: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-button:hover {
-  background: #1e40af;
-}
-
-/* ================= ADD PRODUCT ================= */
-.add-product {
+/* ================= FORMS ================= */
+.add-product,
+.add-ad,
+.add-coupon {
   background: white;
-  padding: 18px;
-  border-radius: 14px;
+  padding: 20px;
+  border-radius: var(--radius);
   display: flex;
   gap: 12px;
-  box-shadow: 0 10px 25px rgba(2,6,23,0.08);
+  flex-wrap: wrap;
+  box-shadow: 0 12px 30px rgba(2,6,23,0.08);
 }
 
-.add-product input {
-  padding: 10px;
+.add-product input,
+.add-ad input,
+.add-coupon input,
+.add-coupon select {
+  padding: 12px;
   flex: 1;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #cbd5e1;
 }
 
 /* ================= STOCK INPUT ================= */
-.stock-input {
-  width: 80px;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid #cbd5e1;
-  margin-right: 6px;
-}
-
-/* ================= ADS ================= */
-.add-ad {
-  background: white;
-  padding: 16px;
-  border-radius: 14px;
-  display: flex;
-  gap: 12px;
-  box-shadow: 0 10px 25px rgba(2,6,23,0.08);
-}
-
-.add-ad input {
-  flex: 1;
+.stock-input,
+input[type="number"] {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #cbd5e1;
 }
 
-#adsList {
-  list-style: none;
-  padding: 0;
-  margin-top: 12px;
-}
-
-#adsList li {
-  background: white;
-  padding: 12px 16px;
-  margin-bottom: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* ================= BUTTONS ================= */
+button {
+  padding: 10px 16px;
+  background: var(--primary);
+  color: white;
+  border: none;
   border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(2,6,23,0.06);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background .2s ease;
 }
 
-/* ================= COUPONS ================= */
-.add-coupon {
-  background: white;
-  padding: 16px;
-  border-radius: 14px;
-  display: flex;
-  gap: 12px;
-  box-shadow: 0 10px 25px rgba(2,6,23,0.08);
+button:hover {
+  background: var(--primary-dark);
 }
 
-.add-coupon input,
-.add-coupon select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5e1;
+button[style*="ef4444"] {
+  background: var(--danger) !important;
 }
 
+/* ================= LISTS (ADS & COUPONS) ================= */
+#adsList,
 #couponList {
   list-style: none;
   padding: 0;
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
+#adsList li,
 #couponList li {
   background: white;
-  padding: 12px 16px;
-  margin-bottom: 8px;
+  padding: 14px 18px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(2,6,23,0.06);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(2,6,23,.06);
 }
-button[style*="ef4444"] {
-  border-radius: 8px;
-}
-/* ================= ORDERS ================= */
 
+/* ================= ORDERS ================= */
 .order-card {
   background: white;
-  padding: 20px;
+  padding: 22px;
   margin-bottom: 20px;
-  border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(2,6,23,0.08);
+  border-radius: var(--radius);
+  box-shadow: 0 14px 35px rgba(2,6,23,.08);
 }
 
 .order-card h3 {
@@ -206,66 +255,30 @@ button[style*="ef4444"] {
 .order-card li {
   margin-bottom: 6px;
 }
-.admin-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 30px;
-}
 
-.admin-card {
-  background: white;
-  padding: 30px;
-  text-align: center;
-  font-size: 18px;
-  border-radius: 12px;
-  text-decoration: none;
-  color: #0f172a;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-
-.admin-card:hover {
-  background: #2563eb;
-  color: white;
-}
-/* ================= ADMIN HOME ================= */
-
-.admin-dashboard {
-  padding: 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-}
-
-.admin-tile {
-  background: white;
-  padding: 25px;
-  border-radius: 14px;
-  text-decoration: none;
-  color: #0f172a;
-  box-shadow: 0 12px 30px rgba(2,6,23,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.admin-tile h3 {
-  margin-top: 0;
-}
-
-.admin-tile p {
-  margin-bottom: 0;
-  color: #475569;
-}
-
-.admin-tile:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(2,6,23,0.15);
-  background: #2563eb;
-  color: white;
-}
-
-.admin-tile:hover p {
-  color: #e5e7eb;
-}
 .order-card span {
   font-weight: 600;
+}
+
+/* ================= LOGIN PAGE ================= */
+main > .add-product {
+  max-width: 420px;
+  margin: auto;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  header {
+    padding: 16px 20px;
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  .add-product,
+  .add-ad,
+  .add-coupon {
+    flex-direction: column;
+  }
 }

@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="admin.css">
   <script src="protect.js"></script>
-
 </head>
 <body>
 
@@ -17,53 +16,24 @@
 
 <main>
 
-  <!-- ADD / EDIT PRODUCT -->
   <section>
     <h3>Add / Edit Product</h3>
 
     <div class="add-product">
       <input id="pName" placeholder="Product Name">
-
-      <input
-        id="pDesc"
-        placeholder="Product Description"
-      >
-
-      <input
-        id="pMrp"
-        type="number"
-        placeholder="Original Price (MRP)"
-      >
-
-      <input
-        id="pPrice"
-        type="number"
-        placeholder="Selling Price"
-      >
-
-      <input
-        id="pImages"
-        placeholder="Image URLs (comma separated)"
-      >
-
-      <input
-        id="pStock"
-        type="number"
-        placeholder="Stock Quantity"
-      >
+      <input id="pDesc" placeholder="Product Description">
+      <input id="pMrp" type="number" placeholder="Original Price (MRP)">
+      <input id="pPrice" type="number" placeholder="Selling Price">
+      <input id="pImages" placeholder="Image URLs (comma separated)">
+      <input id="pStock" type="number" placeholder="Stock Quantity">
 
       <button id="addProductBtn">Save Product</button>
-
-      <button
-        id="cancelEditBtn"
-        style="background:#64748b; display:none"
-      >
+      <button id="cancelEditBtn" style="background:#64748b;display:none">
         Cancel Edit
       </button>
     </div>
   </section>
 
-  <!-- PRODUCT LIST -->
   <section>
     <h3>Product List</h3>
 
@@ -76,7 +46,6 @@
           <th>Actions</th>
         </tr>
       </thead>
-
       <tbody id="productTable"></tbody>
     </table>
   </section>
@@ -86,6 +55,5 @@
 <script src="../js/data.js"></script>
 <script src="products.js"></script>
 <script src="logout.js"></script>
-
 </body>
 </html>

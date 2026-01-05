@@ -3,6 +3,7 @@ const couponList = document.getElementById("couponList");
 function getCoupons() {
   return JSON.parse(localStorage.getItem("coupons")) || [];
 }
+
 function saveCoupons(list) {
   localStorage.setItem("coupons", JSON.stringify(list));
 }
@@ -12,7 +13,8 @@ function renderCoupons() {
   getCoupons().forEach(c => {
     couponList.innerHTML += `
       <li>${c.code} (${c.type} ${c.value})
-      <button onclick="removeCoupon('${c.code}')">❌</button></li>
+        <button onclick="removeCoupon('${c.code}')">❌</button>
+      </li>
     `;
   });
 }
@@ -24,7 +26,15 @@ function removeCoupon(code) {
 
 document.getElementById("addCouponBtn").onclick = () => {
   const code = couponCode.value.toUpperCase();
-  saveCoupons([...getCoupons(), { code, type:couponType.value, value:+couponValue.value }]);
+  if (!code || !couponValue.value) return;
+
+  saveCoupons([
+    ...getCoupons(),
+    { code, type: couponType.value, value: Number(couponValue.value) }
+  ]);
+
+  couponCode.value = "";
+  couponValue.value = "";
   renderCoupons();
 };
 

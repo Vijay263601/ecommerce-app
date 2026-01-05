@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="admin.css">
   <script src="protect.js"></script>
-
 </head>
 <body>
 
@@ -17,33 +16,20 @@
 
 <main>
 
-  <!-- ADD COUPON -->
   <section>
     <h3>Add New Coupon</h3>
 
     <div class="add-coupon">
-      <input
-        type="text"
-        id="couponCode"
-        placeholder="Coupon Code (e.g. SAVE10)"
-      >
-
-      <input
-        type="number"
-        id="couponValue"
-        placeholder="Value"
-      >
-
+      <input id="couponCode" placeholder="Coupon Code">
+      <input id="couponValue" type="number" placeholder="Value">
       <select id="couponType">
         <option value="percent">Percentage (%)</option>
         <option value="flat">Flat (₹)</option>
       </select>
-
       <button id="addCouponBtn">Add Coupon</button>
     </div>
   </section>
 
-  <!-- COUPON LIST -->
   <section>
     <h3>Active Coupons</h3>
     <ul id="couponList"></ul>
@@ -53,6 +39,5 @@
 
 <script src="coupons.js"></script>
 <script src="logout.js"></script>
-
 </body>
 </html>
