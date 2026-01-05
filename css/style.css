@@ -380,3 +380,11 @@ button:disabled {
   color: white;
   border-radius: 10px;
 }
+.product {
+  display: flex;
+  flex-direction: column;
+}
+
+.product button {
+  margin-top: auto;
+}
