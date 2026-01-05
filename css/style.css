@@ -1,20 +1,36 @@
+/* ================= ROOT ================= */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --danger: #ef4444;
+  --success: #16a34a;
+  --dark: #0f172a;
+  --muted: #64748b;
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --radius: 18px;
+}
+
 /* ================= RESET ================= */
 * {
   box-sizing: border-box;
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {
   margin: 0;
-  background: #f4f7fb;
-  color: #0f172a;
+  background: var(--bg);
+  color: var(--dark);
 }
 
 /* ================= HEADER ================= */
 header {
-  background: linear-gradient(90deg, #0f172a, #020617);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(90deg, #020617, #0f172a);
   color: white;
-  padding: 18px 30px;
+  padding: 18px 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,6 +39,7 @@ header {
 header h2 {
   margin: 0;
   font-size: 22px;
+  font-weight: 600;
 }
 
 header a {
@@ -31,53 +48,50 @@ header a {
   font-weight: 500;
 }
 
+/* ================= CART BADGE ================= */
 .cart-link {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 #cartCount {
-  background: #ef4444;
-  color: white;
-  font-size: 12px;
-  padding: 2px 7px;
+  background: var(--danger);
+  padding: 3px 8px;
   border-radius: 999px;
+  font-size: 12px;
 }
 
-/* ================= ANNOUNCEMENT BAR ================= */
+/* ================= ANNOUNCEMENT ================= */
 .announcement-bar {
-  background: #2563eb;
+  background: var(--primary);
   color: white;
   overflow: hidden;
-  white-space: nowrap;
   padding: 10px 0;
 }
 
 .announcement-track {
   display: inline-flex;
   gap: 60px;
-  animation: scroll-left 18s linear infinite;
+  animation: marquee 18s linear infinite;
 }
 
-@keyframes scroll-left {
+@keyframes marquee {
   from { transform: translateX(100%); }
   to { transform: translateX(-100%); }
 }
 
 /* ================= TOP BAR ================= */
 .top-bar {
-  padding: 20px 30px 10px;
+  padding: 24px 28px 10px;
 }
 
 .search-wrapper {
-  display: flex;
-  align-items: center;
   background: white;
-  border-radius: 14px;
-  padding: 10px 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
   max-width: 420px;
-  box-shadow: 0 8px 20px rgba(2,6,23,0.08);
+  box-shadow: 0 10px 30px rgba(2,6,23,.08);
 }
 
 .search-wrapper input {
@@ -87,8 +101,9 @@ header a {
   font-size: 15px;
 }
 
+/* ================= FILTERS ================= */
 .filter-box {
-  margin-top: 14px;
+  margin-top: 16px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
@@ -96,75 +111,81 @@ header a {
 
 .filter-box button {
   background: #e5e7eb;
-  color: #020617;
-  border-radius: 999px;
-  padding: 8px 16px;
   border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
   cursor: pointer;
 }
 
 .filter-box button.active {
-  background: #2563eb;
+  background: var(--primary);
   color: white;
 }
 
-/* ================= PRODUCT GRID ================= */
+/* ================= MAIN ================= */
 main {
-  padding: 10px 30px 40px;
+  padding: 16px 28px 40px;
 }
 
+/* ================= PRODUCT GRID ================= */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
+  gap: 26px;
 }
 
 /* ================= PRODUCT CARD ================= */
 .product {
-  background: white;
-  border-radius: 16px;
+  background: var(--card);
+  border-radius: var(--radius);
   padding: 16px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 25px rgba(2,6,23,0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 14px 45px rgba(2,6,23,.08);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .product:hover {
   transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(2,6,23,0.15);
+  box-shadow: 0 22px 55px rgba(2,6,23,.12);
 }
 
 .product img {
   width: 100%;
-  height: 190px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 14px;
+  background: #f1f5f9;
 }
 
 .product h3 {
   margin: 14px 0 4px;
-  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
 }
 
 .product p {
-  text-align: center;
+  color: var(--primary);
   font-weight: 700;
-  color: #2563eb;
+  margin: 6px 0 14px;
 }
 
 /* ================= BUTTONS ================= */
 button {
-  padding: 12px;
-  border-radius: 10px;
-  background: #2563eb;
-  color: white;
+  margin-top: auto;
+  padding: 12px 16px;
+  border-radius: 12px;
   border: none;
+  background: var(--primary);
+  color: white;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background .2s ease;
 }
 
 button:hover {
-  background: #1e40af;
+  background: var(--primary-dark);
 }
 
 button:disabled {
@@ -172,21 +193,124 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* ================= CART ================= */
+/* ================= PRODUCT PAGE ================= */
+.product-detail {
+  max-width: 1100px;
+  margin: 30px auto;
+  background: var(--card);
+  padding: 32px;
+  border-radius: 22px;
+  display: flex;
+  gap: 40px;
+  box-shadow: 0 20px 55px rgba(2,6,23,.1);
+}
+
+.product-images {
+  flex: 1;
+}
+
+#mainImage {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+#thumbs {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+#thumbs img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  background: #f1f5f9;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+#thumbs img:hover {
+  border-color: var(--primary);
+}
+
+.product-info {
+  flex: 1;
+}
+
+.price {
+  margin: 12px 0;
+}
+
+.price .mrp {
+  text-decoration: line-through;
+  color: var(--muted);
+  margin-right: 8px;
+}
+
+.price .selling {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+#pDesc {
+  line-height: 1.6;
+  color: #334155;
+  margin-bottom: 20px;
+}
+
+/* ================= REVIEWS ================= */
+.reviews {
+  max-width: 1100px;
+  margin: 40px auto 60px;
+  padding: 0 28px;
+}
+
+.reviews h3 {
+  margin-bottom: 14px;
+}
+
+#reviewsList p {
+  background: white;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 6px 18px rgba(2,6,23,.08);
+}
+
+#reviewText {
+  width: 100%;
+  min-height: 90px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5f5;
+  margin-top: 12px;
+  resize: none;
+}
+
+/* ================= CART PAGE ================= */
 .cart-item {
   background: white;
-  padding: 15px;
-  border-radius: 12px;
+  padding: 16px;
+  border-radius: 14px;
   display: flex;
-  gap: 15px;
+  gap: 16px;
   align-items: center;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 25px rgba(2,6,23,.06);
 }
 
 .cart-item img {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
   object-fit: cover;
-  border-radius: 8px;
 }
 
 .cart-info {
@@ -196,24 +320,16 @@ button:disabled {
 .cart-info input {
   width: 60px;
   padding: 6px;
-}
-
-.cart-info .remove {
-  background: #ef4444;
-}
-
-.cart-summary {
-  padding: 20px 30px;
-  text-align: right;
-  font-size: 18px;
+  border-radius: 6px;
+  border: 1px solid #cbd5f5;
 }
 
 /* ================= COUPON ================= */
 .coupon-box {
   background: white;
-  padding: 15px;
-  margin: 20px 30px;
-  border-radius: 12px;
+  padding: 18px;
+  margin: 20px 28px;
+  border-radius: 14px;
 }
 
 #couponMsg {
@@ -221,19 +337,27 @@ button:disabled {
   font-size: 14px;
 }
 
+/* ================= CART SUMMARY ================= */
+.cart-summary {
+  padding: 20px 28px;
+  text-align: right;
+  font-size: 18px;
+}
+
 /* ================= CHECKOUT ================= */
 .checkout-container {
-  display: flex;
-  gap: 20px;
   padding: 30px;
+  display: flex;
+  gap: 24px;
 }
 
 .checkout-container form,
 .order-summary {
   background: white;
-  padding: 20px;
-  border-radius: 12px;
+  padding: 24px;
+  border-radius: 16px;
   flex: 1;
+  box-shadow: 0 10px 30px rgba(2,6,23,.08);
 }
 
 .checkout-container input,
@@ -241,105 +365,26 @@ button:disabled {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5f5;
 }
 
 /* ================= PAYMENT ================= */
 .payment-box {
-  background: white;
+  background: #f8fafc;
   padding: 15px;
   border-radius: 12px;
   border: 1px solid #e5e7eb;
   margin: 15px 0;
 }
 
-.payment-box label {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-#upiBox {
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  margin-top: 10px;
-}
-
-#upiPayBtn {
-  margin-top: 10px;
-  padding: 12px 18px;
-  background: #16a34a;
-  border-radius: 10px;
-}
-
-#upiPayBtn:hover {
-  background: #15803d;
-}
-
 /* ================= ORDERS ================= */
 .order-card {
   background: white;
-  padding: 15px;
-  margin: 15px 30px;
-  border-radius: 12px;
-}
-
-/* ================= PRODUCT DETAIL ================= */
-.product-detail {
-  display: flex;
-  gap: 40px;
-  padding: 30px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-.product-images img#mainImage {
-  max-width: 420px;
-  border-radius: 14px;
-}
-
-#thumbs {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-#thumbs img {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.product-info h2 {
-  margin-top: 0;
-}
-
-.price .mrp {
-  text-decoration: line-through;
-  color: gray;
-}
-
-.price .selling {
-  font-size: 26px;
-  font-weight: 700;
-  color: #2563eb;
-}
-
-/* ================= REVIEWS ================= */
-.reviews {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 0 30px;
-}
-
-#reviewsList p {
-  background: white;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  padding: 18px;
+  margin: 16px 28px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(2,6,23,.08);
 }
 
 /* ================= TOAST ================= */
@@ -350,9 +395,10 @@ button:disabled {
   background: #020617;
   color: white;
   padding: 14px 18px;
-  border-radius: 10px;
+  border-radius: 12px;
   opacity: 0;
   pointer-events: none;
+  transition: opacity .3s ease;
 }
 
 .toast.show {
@@ -361,30 +407,16 @@ button:disabled {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-  .checkout-container,
-  .product-detail {
+  .product-detail,
+  .checkout-container {
     flex-direction: column;
   }
-}
-#upiBox {
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  margin-top: 10px;
-}
 
-#upiPayBtn {
-  margin-top: 10px;
-  padding: 12px 18px;
-  background: #16a34a;
-  color: white;
-  border-radius: 10px;
-}
-.product {
-  display: flex;
-  flex-direction: column;
-}
+  header {
+    padding: 16px 20px;
+  }
 
-.product button {
-  margin-top: auto;
+  main {
+    padding: 16px 20px 40px;
+  }
 }

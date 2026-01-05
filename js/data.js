@@ -1,29 +1,22 @@
-// Initial seed products (used only once)
-const seedProducts = [
-  {
-    id: 1,
-    name: "Men's T-Shirt",
-    mrp: 699,
-    price: 499,
-    images: ["assets/images/tshirt.jpg"],
-    description: "Comfortable cotton t-shirt",
-    stock: 7
-  },
-  {
-    id: 2,
-    name: "Running Shoes",
-    mrp: 2499,
-    price: 1999,
-    images: ["assets/images/shoes.jpg"],
-    description: "Lightweight running shoes",
-    stock: 5
-  }
-];
+const DEFAULT_IMAGE = "assets/images/default.jpg";
 
-/* ================= PRODUCT HELPERS ================= */
+function normalizeProduct(p) {
+  const images = Array.isArray(p.images)
+    ? p.images
+    : p.image
+      ? [p.image]
+      : [];
+
+  return {
+    ...p,
+    images: images.length ? images : [DEFAULT_IMAGE],
+    description: p.description || ""
+  };
+}
 
 function getProducts() {
-  return JSON.parse(localStorage.getItem("products")) || seedProducts;
+  const products = JSON.parse(localStorage.getItem("products")) || [];
+  return products.map(normalizeProduct);
 }
 
 function saveProducts(products) {

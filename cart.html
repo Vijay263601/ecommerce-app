@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <title>Your Cart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,18 +19,15 @@
   <a href="index.html">⬅ Back to Shop</a>
 </header>
 
-<main id="cartContainer">
-  <!-- Cart items render here -->
-</main>
+<main id="cartContainer"></main>
 
-<!-- Coupon Section -->
+<!-- Coupon -->
 <div class="coupon-box">
   <input type="text" id="couponInput" placeholder="Enter coupon code">
   <button id="applyCoupon">Apply</button>
   <p id="couponMsg"></p>
 </div>
 
-<!-- Total -->
 <div class="cart-summary">
   <h3 id="totalPrice">Total: ₹0</h3>
   <a href="checkout.html">
@@ -32,10 +35,8 @@
   </a>
 </div>
 
-<!-- Toast -->
 <div id="toast" class="toast"></div>
 
-<!-- Scripts -->
 <script src="js/cart.js"></script>
 <script src="js/cartPage.js"></script>
 

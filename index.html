@@ -4,11 +4,17 @@
   <meta charset="UTF-8">
   <title>Mini E-Commerce</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header class="header">
+<header>
   <h2>Mini E-Commerce</h2>
   <a href="cart.html" class="cart-link">
     🛒 Cart <span id="cartCount">0</span>
@@ -20,16 +26,11 @@
   <div class="announcement-track" id="adsTrack"></div>
 </div>
 
-<!-- TOP BAR -->
+<!-- SEARCH & FILTER -->
 <section class="top-bar">
 
   <div class="search-wrapper">
-    <span class="search-icon">🔍</span>
-    <input 
-      type="text" 
-      id="searchInput" 
-      placeholder="Search for products..."
-    >
+    <input type="text" id="searchInput" placeholder="Search products...">
   </div>
 
   <div class="filter-box">
@@ -41,7 +42,7 @@
 
 </section>
 
-<!-- ✅ PRODUCT GRID (ONLY ONE) -->
+<!-- PRODUCTS -->
 <main class="product-grid" id="productList"></main>
 
 <div id="toast" class="toast"></div>

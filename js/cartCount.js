@@ -8,5 +8,4 @@ function updateCartCount() {
   }
 }
 
-// Run on page load
 updateCartCount();
